@@ -1,4 +1,4 @@
-import {CurrencyProvider} from './Currency.provider';
+import {CurrencyProvider} from '../providers/Currency.provider';
 import { readable } from 'svelte/store';
 
 const currenciesProvider = new CurrencyProvider();
