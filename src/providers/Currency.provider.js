@@ -19,12 +19,17 @@ export class CurrencyProvider {
     async getCurrencies() {
         const rawResponse = await fetch(`${this._apiURL}currencies?apiKey=${settings.api.key}`);
         const response = await rawResponse.json();
-        this._currencies = Object.keys(response.results).map( (key) => {
+        const currencies = Object.keys(response.results).map( (key) => {
             return {
                 value: key,
                 label: `${key} - ${response.results[key].currencyName}`
             };
         });
+        this._currencies = currencies.sort(function(a, b){
+            if(a.value < b.value) return -1;
+            if(a.value > b.value) return 1;
+            return 0;
+        })
         return this._currencies;
     }
 

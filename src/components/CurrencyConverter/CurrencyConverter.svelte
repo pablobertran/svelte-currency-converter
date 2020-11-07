@@ -2,6 +2,7 @@
 <script>
     import {getCurrencyConversion} from "../../stores/store";
     import CountryCombobox from "../Combobox/CountryCombobox.svelte";
+    import {settings} from "../../config/env";
 
     export let currencies;
     let currencyFrom;
@@ -19,7 +20,7 @@
 
     const convert = async () => {
         const conversionRate = await getCurrencyConversion(currencyFrom.value, currencyTo.value, valueFrom);
-        valueTo = conversionRate * valueFrom;
+        valueTo = parseFloat(conversionRate * valueFrom).toFixed(settings.decimals);
     };
 
     const getFormValidationErrors = () => {
